@@ -2,6 +2,78 @@ package com.opcTjyx.entity;
 
 public class TaiDaPlc1 {
 
+	public static final int D60_COL_LOC=1;
+	public static final String D60_COL_NAME="D60";
+	public static final String D60_ITEM_NAME="TAIDA.PLC1.D60";
+	
+	public static final int D61_COL_LOC=2;
+	public static final String D61_COL_NAME="D61";
+	public static final String D61_ITEM_NAME="TAIDA.PLC1.D61";
+	
+	public static final int D62_COL_LOC=3;
+	public static final String D62_COL_NAME="D62";
+	public static final String D62_ITEM_NAME="TAIDA.PLC1.D62";
+	
+	public static final int D63_COL_LOC=4;
+	public static final String D63_COL_NAME="D63";
+	public static final String D63_ITEM_NAME="TAIDA.PLC1.D63";
+	
+	public static final int D64_COL_LOC=5;
+	public static final String D64_COL_NAME="D64";
+	public static final String D64_ITEM_NAME="TAIDA.PLC1.D64";
+	
+	public static final int D65_COL_LOC=6;
+	public static final String D65_COL_NAME="D65";
+	public static final String D65_ITEM_NAME="TAIDA.PLC1.D65";
+	
+	public static final int D66_COL_LOC=7;
+	public static final String D66_COL_NAME="D66";
+	public static final String D66_ITEM_NAME="TAIDA.PLC1.D66";
+	
+	public static final int D67_COL_LOC=8;
+	public static final String D67_COL_NAME="D67";
+	public static final String D67_ITEM_NAME="TAIDA.PLC1.D67";
+	
+	public static final int D68_COL_LOC=9;
+	public static final String D68_COL_NAME="D68";
+	public static final String D68_ITEM_NAME="TAIDA.PLC1.D68";
+	
+	public static final int D69_COL_LOC=10;
+	public static final String D69_COL_NAME="D69";
+	public static final String D69_ITEM_NAME="TAIDA.PLC1.D69";
+	
+	public static final int D70_COL_LOC=11;
+	public static final String D70_COL_NAME="D70";
+	public static final String D70_ITEM_NAME="TAIDA.PLC1.D70";
+	
+	public static final int D71_COL_LOC=12;
+	public static final String D71_COL_NAME="D71";
+	public static final String D71_ITEM_NAME="TAIDA.PLC1.D71";
+	
+	public static final int D72_COL_LOC=13;
+	public static final String D72_COL_NAME="D72";
+	public static final String D72_ITEM_NAME="TAIDA.PLC1.D72";
+	
+	public static final int D73_COL_LOC=14;
+	public static final String D73_COL_NAME="D73";
+	public static final String D73_ITEM_NAME="TAIDA.PLC1.D73";
+	
+	public static final int D74_COL_LOC=15;
+	public static final String D74_COL_NAME="D74";
+	public static final String D74_ITEM_NAME="TAIDA.PLC1.D74";
+	
+	public static final int D75_COL_LOC=16;
+	public static final String D75_COL_NAME="D75";
+	public static final String D75_ITEM_NAME="TAIDA.PLC1.D75";
+	
+	public static final int D76_COL_LOC=17;
+	public static final String D76_COL_NAME="D76";
+	public static final String D76_ITEM_NAME="TAIDA.PLC1.D76";
+	
+	public static final int M584_COL_LOC=18;
+	public static final String M584_COL_NAME="M584";
+	public static final String M584_ITEM_NAME="TAIDA.PLC1.M584";
+	
 	private Integer ID;
 	public Integer getID() {
 		return ID;
