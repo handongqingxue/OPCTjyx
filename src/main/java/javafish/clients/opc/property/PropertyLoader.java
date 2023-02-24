@@ -73,26 +73,24 @@ public class PropertyLoader {
     Properties props = null;
     InputStream in = null;
     try {
-    	
-      ClassLoader cl = ClassLoader.getSystemClassLoader();
-      String name = propsName.replace('.', '/').concat(".properties");      // propsName    javafish/clients/opc/JCustomOpc.properties
+    	ClassLoader cl = ClassLoader.getSystemClassLoader();
+    	String name = propsName.replace('.', '/').concat(".properties");      // propsName    javafish/clients/opc/JCustomOpc.properties
     	System.out.println("propsName======"+propsName);
-  	System.out.println("name======"+name);
-      in = cl.getResourceAsStream(name);
-      //in = cl.getResourceAsStream("configBf2.properties");
-      
+    	System.out.println("name======"+name);
+	    in = cl.getResourceAsStream(name);
+	    //in = cl.getResourceAsStream("configBf2.properties");
     	System.out.println("in======"+in);
-      if (in != null) {
-        props = new Properties();
-        props.load(in);
-      }
+        if (in != null) {
+          props = new Properties();
+          props.load(in);
+        }
     }
     catch (Exception e) {
-      props = null;
+        props = null;
     }
     finally {
-      if (props == null) {
-        System.err.print("Property file " + propsName + " doesn't exist. System terminated.");
+        if (props == null) {
+          System.err.print("Property file " + propsName + " doesn't exist. System terminated.");
         System.exit(0);
       }
     }

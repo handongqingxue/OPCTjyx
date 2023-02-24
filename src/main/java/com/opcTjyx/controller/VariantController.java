@@ -6,14 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.opcTjyx.entity.TaiDaPlc1;
-import com.opcTjyx.util.DBHelper;
+import com.opcTjyx.util.*;
 
 import javafish.clients.opc.JOpc;
 import javafish.clients.opc.SynchReadItemExample;
@@ -25,17 +19,7 @@ import javafish.clients.opc.exception.SynchReadException;
 import javafish.clients.opc.exception.UnableAddGroupException;
 import javafish.clients.opc.exception.UnableAddItemException;
 
-@Controller
-@RequestMapping("/variant")
 public class VariantController {
-	
-	@RequestMapping(value="/goTest")
-	public String goTest(HttpServletRequest request) {
-		
-		//http://localhost:8080/OPCTjyx/variant/goTest
-		
-		return "test";
-	}
 	
 	public static void main(String[] args) {
 
@@ -49,10 +33,10 @@ public class VariantController {
 		 * JOPC1						OPC客户端的用户名---按你喜欢来填
 		 */
 		//JOpc jopc = new JOpc("127.0.0.1", "Kepware.KEPServerEX.V6", "M3N881PM37O1M1D");
-		JOpc jopc = new JOpc("127.0.0.1", "Kepware.KEPServerEX.V5", "WIN-5BU0SQ3T97V");
+		JOpc jopc = new JOpc(Contant.SERVER_IP, Contant.OPC_SERVER_PROG_ID, Contant.SERVER_CLIENT_HANDLE);
 		
 		//OpcGroup group = new OpcGroup("chanel1.device1._System", true, 500, 0.0f);
-		OpcGroup group = new OpcGroup("TAIDA.PLC1", true, 500, 0.0f);
+		OpcGroup group = new OpcGroup(Contant.OPC_GROUP_NAME, true, 500, 0.0f);
 		
 		// new Opcitem("K1.Value",true,"");    "K1.Value"  表示要读取opc服务器中的变量名称的值。
 		/*
@@ -113,7 +97,7 @@ public class VariantController {
 				responseGroup = jopc.synchReadGroup(group);
 				ArrayList<OpcItem> opcItems = responseGroup.getItems();
 				TaiDaPlc1 taiDaPlc1 = createTaiDaPlc1Entity(opcItems);
-				if(!taiDaPlc1.getM584())
+				if(taiDaPlc1.getM584())
 					addTaiDaPlc1(taiDaPlc1);
 			} catch (ComponentNotFoundException e) {
 				//logger.error(e.getMessage()); //获取responseGroup错误
