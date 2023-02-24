@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.opcTjyx.util.DBHelper;
+
 import javafish.clients.opc.JOpc;
 import javafish.clients.opc.SynchReadItemExample;
 import javafish.clients.opc.component.OpcGroup;
@@ -22,12 +24,6 @@ import javafish.clients.opc.exception.UnableAddItemException;
 @RequestMapping("/variant")
 public class VariantController {
 	
-	static {
-		System.out.println("111111111111111");
-		JOpc.coInitialize();   //初始化JOpc        JOpc继承父类JCustomOpc
-		
-	}
-	
 	@RequestMapping(value="/goTest")
 	public String goTest(HttpServletRequest request) {
 		
@@ -35,12 +31,13 @@ public class VariantController {
 		
 		return "test";
 	}
+	
+	public static void main(String[] args) {
 
-	@RequestMapping(value="/getTaiDaPlc1")
-	@ResponseBody
-	public void getTaiDaPlc1() {
-
+		/*
 		SynchReadItemExample test = new SynchReadItemExample();
+		JOpc.coInitialize();   //初始化JOpc        JOpc继承父类JCustomOpc
+		*/
 		
 		/**
 		 * 创建连接对象
@@ -48,6 +45,7 @@ public class VariantController {
 		 * KingView.View.1     opcService在系统注册表中的注册名,  组态王中的opcService默认名KingView.View.1,如果你不是使用组态王中的opcService那么请修改你要连接的注册名(opcService服务名称)
 		 * JOPC1						OPC客户端的用户名---按你喜欢来填
 		 */
+		/*
 		JOpc jopc = new JOpc("127.0.0.1", "Kepware.KEPServerEX.V6", "M3N881PM37O1M1D");
 		
 		OpcGroup group = new OpcGroup("chanel1.device1._System", true, 500, 0.0f);
@@ -102,5 +100,9 @@ public class VariantController {
 				e.printStackTrace();
 			}
 		}
+		*/
+		System.out.println("11111111111111");
+		String sql = "DELETE FROM Person WHERE cid=";
+		DBHelper.doUpdate(sql);
 	}
 }
