@@ -6,7 +6,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 public final class DBHelper {
 	private DBHelper() {}
 	/** 连接字符串 */
-	private static String url = "jdbc:sqlserver://localhost:1433;DatabaseName=Test";
+	private static String url = "jdbc:sqlserver://localhost:1433;DatabaseName=OPCTjyx";
 	/** 数据库用户名 */
 	private static String user = "sa";
 	/** 数据库密码 */
