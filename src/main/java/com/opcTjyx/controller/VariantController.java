@@ -113,7 +113,7 @@ public class VariantController {
 				responseGroup = jopc.synchReadGroup(group);
 				ArrayList<OpcItem> opcItems = responseGroup.getItems();
 				TaiDaPlc1 taiDaPlc1 = createTaiDaPlc1Entity(opcItems);
-				if(taiDaPlc1.getM584())
+				if(!taiDaPlc1.getM584())
 					addTaiDaPlc1(taiDaPlc1);
 			} catch (ComponentNotFoundException e) {
 				//logger.error(e.getMessage()); //获取responseGroup错误
@@ -219,7 +219,7 @@ public class VariantController {
 			sqlSB.append(TaiDaPlc1.D75_COL_NAME);
 			sqlSB.append(",");
 			sqlSB.append(TaiDaPlc1.D76_COL_NAME);
-			sqlSB.append(") values(?)");
+			sqlSB.append(") values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			pst = con.prepareStatement(sqlSB.toString());//？：占位符
 			pst.setString(TaiDaPlc1.D60_COL_LOC, taiDaPlc1.getD60());
 			pst.setString(TaiDaPlc1.D61_COL_LOC, taiDaPlc1.getD61());
