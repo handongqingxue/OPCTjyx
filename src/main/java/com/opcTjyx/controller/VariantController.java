@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-import com.opcTjyx.entity.TaiDaPlc1;
+import com.opcTjyx.entity.*;
 import com.opcTjyx.util.*;
 
 import javafish.clients.opc.JOpc;
@@ -20,6 +22,9 @@ import javafish.clients.opc.exception.UnableAddGroupException;
 import javafish.clients.opc.exception.UnableAddItemException;
 
 public class VariantController {
+	
+	private static SimpleDateFormat timeSDF=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static boolean restore=true;
 	
 	public static void main(String[] args) {
 
@@ -92,13 +97,19 @@ public class VariantController {
 		while (true) {
 			try {
 				synchronized(test) {
-					test.wait(5000);
+					test.wait(500);
 				}
 				responseGroup = jopc.synchReadGroup(group);
 				ArrayList<OpcItem> opcItems = responseGroup.getItems();
 				TaiDaPlc1 taiDaPlc1 = createTaiDaPlc1Entity(opcItems);
-				if(taiDaPlc1.getM584())
+				//taiDaPlc1.setM584(true);
+				if(!taiDaPlc1.getM584()&&!restore) {
+					restore=true;
+				}
+				if(taiDaPlc1.getM584()&&restore) {
+					restore=false;
 					addTaiDaPlc1(taiDaPlc1);
+				}
 			} catch (ComponentNotFoundException e) {
 				//logger.error(e.getMessage()); //获取responseGroup错误
 				JOpc.coUninitialize();     //错误关闭连接
@@ -203,8 +214,15 @@ public class VariantController {
 			sqlSB.append(TaiDaPlc1.D75_COL_NAME);
 			sqlSB.append(",");
 			sqlSB.append(TaiDaPlc1.D76_COL_NAME);
-			sqlSB.append(") values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			sqlSB.append(",");
+			sqlSB.append(TaiDaPlc1.M584_COL_NAME);
+			sqlSB.append(",");
+			sqlSB.append(TaiDaPlc1.TIME_COL_NAME);
+			sqlSB.append(") values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			pst = con.prepareStatement(sqlSB.toString());//？：占位符
+
+			taiDaPlc1.setTime(timeSDF.format(new Date()));
+			
 			pst.setString(TaiDaPlc1.D60_COL_LOC, taiDaPlc1.getD60());
 			pst.setString(TaiDaPlc1.D61_COL_LOC, taiDaPlc1.getD61());
 			pst.setString(TaiDaPlc1.D62_COL_LOC, taiDaPlc1.getD62());
@@ -222,6 +240,9 @@ public class VariantController {
 			pst.setString(TaiDaPlc1.D74_COL_LOC, taiDaPlc1.getD74());
 			pst.setString(TaiDaPlc1.D75_COL_LOC, taiDaPlc1.getD75());
 			pst.setString(TaiDaPlc1.D76_COL_LOC, taiDaPlc1.getD76());
+			pst.setBoolean(TaiDaPlc1.M584_COL_LOC, taiDaPlc1.getM584());
+			pst.setString(TaiDaPlc1.TIME_COL_LOC, taiDaPlc1.getTime());
+			
 			//第四步：执行sql语句
 			int cnt = pst.executeUpdate();//插入||修改||删除返回操作记录数，即受影响的行数
 			System.out.println(cnt);

@@ -74,6 +74,9 @@ public class TaiDaPlc1 {
 	public static final String M584_COL_NAME="M584";
 	public static final String M584_ITEM_NAME="TAIDA.PLC1.M584";
 	
+	public static final int TIME_COL_LOC=19;
+	public static final String TIME_COL_NAME="Time";
+	
 	private Integer ID;
 	public Integer getID() {
 		return ID;
@@ -189,6 +192,12 @@ public class TaiDaPlc1 {
 	public void setM584(Boolean m584) {
 		M584 = m584;
 	}
+	public String getTime() {
+		return Time;
+	}
+	public void setTime(String time) {
+		Time = time;
+	}
 	private String D60;
 	private String D61;
 	private String D62;
@@ -207,4 +216,5 @@ public class TaiDaPlc1 {
 	private String D75;
 	private String D76;
 	private Boolean M584;
+	private String Time;
 }
