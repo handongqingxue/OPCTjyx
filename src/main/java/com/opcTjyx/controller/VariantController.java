@@ -101,12 +101,12 @@ public class VariantController {
 				}
 				responseGroup = jopc.synchReadGroup(group);
 				ArrayList<OpcItem> opcItems = responseGroup.getItems();
-				TaiDaPlc1 taiDaPlc1 = createTaiDaPlc1Entity(opcItems);
+				TaiDaPlc1 taiDaPlc1 = createTaiDaPlc1Entity(opcItems);//从opc服务器端获取的变量比较多，先创建实体再判断M584变量是否为true，是否需要添加变量到数据库
 				//taiDaPlc1.setM584(true);
-				if(!taiDaPlc1.getM584()&&!restore) {
+				if(!taiDaPlc1.getM584()&&!restore) {//在M584变量为false，且还原标识为false的情况下，置还原标识为true，以便下次添加数据到数据库里
 					restore=true;
 				}
-				if(taiDaPlc1.getM584()&&restore) {
+				if(taiDaPlc1.getM584()&&restore) {//在M584变量为true，且还原标识为true的情况下，置还原标识为false，并添加数据到数据库里。仅添加这一次，待还原标识变为true后才能再次添加
 					restore=false;
 					addTaiDaPlc1(taiDaPlc1);
 				}
@@ -122,6 +122,11 @@ public class VariantController {
 		}
 	}
 	
+	/**
+	 * 根据从opc服务器那边获取的变量，创建TaiDaPlc1实体
+	 * @param opcItems
+	 * @return
+	 */
 	private static TaiDaPlc1 createTaiDaPlc1Entity(ArrayList<OpcItem> opcItems) {
 		TaiDaPlc1 taiDaPlc1=new TaiDaPlc1();
 		for (OpcItem opcItem : opcItems) {
