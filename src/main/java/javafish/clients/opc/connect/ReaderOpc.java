@@ -38,7 +38,7 @@ public class ReaderOpc {
 		
 		OpcGroup group = new OpcGroup("chanel1.device1._System", true, 500, 0.0f);
 		
-		// new Opcitem("K1.Value",true,"");    "K1.Value"  表示要读取opc服务器中的变量名称的值。
+		//new Opcitem("K1.Value",true,"");    "K1.Value"  表示要读取opc服务器中的变量名称的值。
 		group.addItem(new OpcItem("chanel1.device1._System._Error", true, ""));      
 		group.addItem(new OpcItem("chanel1.device1._System._NoError", true, ""));
 		group.addItem(new OpcItem("chanel1.device1._System._ScanMode", true, ""));
